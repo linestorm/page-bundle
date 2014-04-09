@@ -1,0 +1,20 @@
+{
+    "name": "linestorm/page-bundle",
+    "description": "Page Module for LineStorm PostBundle for symfony 2.3",
+    "require": {
+        "php": ">=5.3.0",
+        "symfony/symfony": ">=2.3",
+        "linestorm/post-bundle" : "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Andy Thorne",
+            "email": "contrabandvr@gmail.com",
+            "homepage": "http://www.andy-thorne.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"LineStorm\\": ""}
+    },
+    "minimum-stability": "dev"
+}
