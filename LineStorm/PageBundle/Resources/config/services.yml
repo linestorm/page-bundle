@@ -1,7 +1,0 @@
-parameters:
-#    line_storm_page.example.class: LineStorm\PageBundle\Example
-
-services:
-#    line_storm_page.example:
-#        class: %line_storm_page.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

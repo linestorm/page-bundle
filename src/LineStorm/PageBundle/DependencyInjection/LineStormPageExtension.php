@@ -24,5 +24,11 @@ class LineStormPageExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('services-form-types.yml');
+
+        $xmlLoader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $xmlLoader->load('orm.xml');
+
+        $container->getDefinition('linestorm.cms.module.page.model.page.listener')->addTag('doctrine.event_subscriber');
     }
 }

@@ -1,0 +1,19 @@
+linestorm_cms_module_page_admin_list:
+    pattern:  /
+    defaults: { _controller: LineStormPageBundle:Admin:list }
+
+linestorm_cms_module_page_admin_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: LineStormPageBundle:Admin:edit }
+    requirements:
+       id: \d+
+
+linestorm_cms_module_page_admin_view:
+    pattern:  /{id}
+    defaults: { _controller: LineStormPageBundle:Admin:view }
+    requirements:
+       id: \d+
+
+linestorm_cms_module_page_admin_create:
+    pattern:  /new
+    defaults: { _controller: LineStormPageBundle:Admin:new }

@@ -1,0 +1,35 @@
+parameters:
+  linestorm.cms.module.page.class:             LineStorm\PageBundle\Module\PageModule
+
+  # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageTriGraphSearchProvider
+  # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageFullTextSearchProvider
+  # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageSolrSearchProvider
+
+services:
+  linestorm.cms.module.page:
+    class: %linestorm.cms.module.page.class%
+    tags:
+      - { name: linestorm.cms.module }
+      - { name: linestorm.content.component_module }
+
+  #
+  # TWIG POST MODULE
+#  linestorm.cms.twig.module_post_extension:
+#    class: LineStorm\PostBundle\Twig\PostExtension
+#    arguments: [ @linestorm.cms.module.post, @service_container ]
+#    tags:
+#      - { name: twig.extension }
+
+  #
+  # SEARCH PROVIDERS
+#  linestorm.cms.module.post.search_provider:
+#    class: %linestorm.cms.module.post.search_provider.class%
+#    tags:
+#      - { name: linestorm.cms.module.search.provider, map: post }
+
+#  linestorm.cms.module.post.search_provider:
+#    class: %linestorm.cms.module.post.search_provider.class%
+#    tags:
+#      - { name: linestorm.cms.module.search.provider, map: post }
+#    calls:
+#      - [ 'setSolr', [@solr.client.default]]

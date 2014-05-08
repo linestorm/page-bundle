@@ -1,0 +1,23 @@
+{% extends 'LineStormCmsBundle:Admin:index.html.twig' %}
+
+{% block page_title %}
+    {{ page.title|capitalize }}
+{% endblock %}
+
+{% block page_desc %}
+    by {{ page.author.username }} on {{ page.liveOn|date('d/m/Y H:i') }} |
+    {% for tag in page.tags %}
+        <a href="#" class="label label-default">{{ tag.name }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block module %}
+    <article>
+        {% for content in page.content %}
+            <div class="page-content">
+                {{ render_page_component_view(content) }}
+            </div>
+            <hr />
+        {% endfor %}
+    </article>
+{% endblock %}

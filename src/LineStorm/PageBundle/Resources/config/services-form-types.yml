@@ -1,0 +1,16 @@
+#
+# DEFAULT FORM TYPES
+#
+parameters:
+  linestorm.cms.module.page.form.page.class: LineStorm\PageBundle\Form\PageFormType
+
+services:
+
+  #
+  # Form Types
+  #
+  linestorm.cms.module.page.form.page:
+        class: %linestorm.cms.module.page.form.page.class%
+        arguments: [@linestorm.cms.model_manager, @linestorm.cms.module_manager]
+        tags:
+            - { name: form.type, alias: linestorm_cms_form_page }
