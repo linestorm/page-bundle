@@ -98,9 +98,9 @@ class PageController extends AbstractApiController implements ClassResourceInter
             $em->flush();
 
             // update the search provider!
-            $searchManager = $this->get('linestorm.cms.module.search_manager');
+            /*$searchManager = $this->get('linestorm.cms.module.search_manager');
             $pageSearchProvider = $searchManager->get('page');
-            $pageSearchProvider->index($page);
+            $pageSearchProvider->index($page);*/
 
             $locationPage = array(
                 'location' => $this->generateUrl('linestorm_cms_module_page_admin_edit', array( 'id' => $page->getId() ))
@@ -162,11 +162,11 @@ class PageController extends AbstractApiController implements ClassResourceInter
             $em->flush();
 
             // update the search provider!
-            $searchManager = $this->get('linestorm.cms.module.search_manager');
+            /*$searchManager = $this->get('linestorm.cms.module.search_manager');
             $pageSearchProvider = $searchManager->get('page');
-            $pageSearchProvider->index($updatedPage);
+            $pageSearchProvider->index($updatedPage);*/
 
-            $view = $this->createResponse(array('location' => $this->generateUrl('linestorm_cms_module_page_api_get_page', array( 'id' => $form->getData()->getId()))), 200);
+            $view = $this->createResponse(array('location' => $this->generateUrl('linestorm_cms_module_page_api_get_page', array( 'id' => $updatedPage->getId()))), 200);
         }
         else
         {

@@ -51,6 +51,7 @@ class AdminController extends Controller
         $module        = $moduleManager->getModule('page');
 
         $modelManager = $this->get('linestorm.cms.model_manager');
+
         $page = $modelManager->get('page')->find($id);
 
         $form = $this->createForm('linestorm_cms_form_page', $page, array(

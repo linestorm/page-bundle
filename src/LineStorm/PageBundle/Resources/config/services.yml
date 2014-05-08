@@ -1,6 +1,8 @@
 parameters:
   linestorm.cms.module.page.class:             LineStorm\PageBundle\Module\PageModule
 
+  linestorm.cms.page.routing_loader.class:     LineStorm\PageBundle\Router\PageLoader
+
   # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageTriGraphSearchProvider
   # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageFullTextSearchProvider
   # linestorm.cms.module.page.search_provider.class: LineStorm\PageBundle\Search\PageSolrSearchProvider
@@ -12,13 +14,20 @@ services:
       - { name: linestorm.cms.module }
       - { name: linestorm.content.component_module }
 
+
+  linestorm.cms.page.routing_loader:
+    class: %linestorm.cms.page.routing_loader.class%
+    arguments: [@linestorm.cms.model_manager]
+    tags:
+      - { name: routing.loader }
+
   #
   # TWIG POST MODULE
-#  linestorm.cms.twig.module_post_extension:
-#    class: LineStorm\PostBundle\Twig\PostExtension
-#    arguments: [ @linestorm.cms.module.post, @service_container ]
-#    tags:
-#      - { name: twig.extension }
+  linestorm.cms.twig.module_page_extension:
+    class: LineStorm\PageBundle\Twig\PageExtension
+    arguments: [ @linestorm.cms.module.page ]
+    tags:
+      - { name: twig.extension }
 
   #
   # SEARCH PROVIDERS

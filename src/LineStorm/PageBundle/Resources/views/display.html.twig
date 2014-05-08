@@ -1,0 +1,74 @@
+{% extends 'LineStormCmsBundle::layout.html.twig' %}
+
+{% block requirejs %}
+    {{
+        include('LineStormCmsBundle::requirejs.html.twig', {
+            requirejs_module: ['app/main', 'cms_post_view']|merge(module.componentViewAssets)
+        })
+    }}
+{% endblock %}
+
+{% block head %}
+
+    {% stylesheets
+    filter="compass" output="assets/bundles/linestormpost/css/view.css"
+    "@LineStormPostBundle/Resources/assets/sass/view.scss"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <link rel="stylesheet" href="/{{ assetsPath }}/vendor/highlightjs/styles/github.css">
+
+{% endblock %}
+
+{% block meta_keywords %}{{ page.metaKeywords }}{% endblock %}
+{% block meta_desc %}{{ page.metaDescription }}{% endblock %}
+
+{% block title %}{{ page.title | capitalize }}{% endblock %}
+
+{% block page_title %}
+    {{ page.title | capitalize }}
+{% endblock %}
+
+{% block body %}
+    {% if app.user and page.author and (app.user.id == page.author.id or app.user.hasGroup('admin')) %}
+        <div class="pull-right navbar-nav navbar" style="position: absolute; right: 0">
+            <a href="{{ path('linestorm_cms_module_page_admin_edit', {id: page.id}) }}" class="btn btn-primary" id="article-edit"><i class="fa-edit"></i> Edit</a>
+        </div>
+    {% endif %}
+        <article id="article-body blog">
+            <div class="content">
+
+                <img class="article-image" src="{{ page.coverImage.src }}" alt="{{ page.coverImage.alt }}" credits={{ page.coverImage.credits }} />
+
+                <div class="article-details">
+                    <div class="pull-left">
+                        {% include 'LineStormTagComponentBundle::view.html.twig' with {content: page.tags} %}
+                    </div>
+                    <div class="pull-right">
+                        By {{ page.author.username | capitalize }} on
+                        <time datetime="{{ page.liveOn | date("Y-m-d\\TH:i:sP") }}"  pubdate="pubdate">{{ page.liveOn | date("F d, Y") }}</time>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                        <p>
+                            {{ include('LineStormPostBundle::social.html.twig') }}
+                        </p>
+                    </div>
+                </div>
+
+                <hr />
+
+                {% for content in page.content %}
+                    <div class="post-content">
+                        {% set view = render_content_component_view(content) %}
+                        {% if view %}
+                            {% include view.template ignore missing with view.options %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        </article>
+{% endblock %}
+
