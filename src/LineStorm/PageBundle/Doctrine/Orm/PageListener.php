@@ -37,8 +37,10 @@ class PageListener implements EventSubscriber
         {
             $repo = $args->getEntityManager()->getRepository(get_class($object));
             $qb = $repo->createQueryBuilder('o');
-            $qb->where('o.slug=:slug')->setParameter('slug', $object->getSlug());
-
+            $qb->where('(o.slug=:slug or o.route=:route)')->setParameters(array(
+                'slug'  => $object->getSlug(),
+                'route' => $object->getRoute(),
+            ));
             if($object->getId() > 0)
             {
                 $qb->andWhere('o.id != ?1')->setParameter(1, $object->getId());

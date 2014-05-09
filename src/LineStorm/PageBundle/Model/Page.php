@@ -87,6 +87,13 @@ abstract class Page implements ContentNodeInterface
     protected $slug;
 
     /**
+     * This is the symfony2 custom route id
+     *
+     * @var string
+     */
+    protected $route;
+
+    /**
      * @var string
      */
     protected $blurb;
@@ -526,6 +533,20 @@ abstract class Page implements ContentNodeInterface
         return $this->coverImage;
     }
 
+    /**
+     * @param string $route
+     */
+    public function setRoute($route)
+    {
+        $this->route = $route;
+    }
 
+    /**
+     * @return string
+     */
+    public function getRoute()
+    {
+        return $this->route;
+    }
 
 }

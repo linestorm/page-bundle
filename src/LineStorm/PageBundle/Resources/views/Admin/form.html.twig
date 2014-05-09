@@ -42,7 +42,7 @@
 
     {{
         include('LineStormCmsBundle::requirejs.html.twig', {
-            requirejs_module: ['cms_main', 'cms_post']|merge(module.componentAssets)
+            requirejs_module: ['cms_main', 'cms_page']|merge(module.componentAssets)
         })
     }}
 
@@ -66,19 +66,9 @@
         </div>
 
         {{ form_row(form.liveOn) }}
-
-        <!--
-            <a href="#" class="options-toggle" data-toggle="extra-options">Extra Options <i class="pull-right fa-angle-down"></i></a>
-            <div class="extra-options" style="display: none">
-            </div>
-
-            <hr />
-
-            <a href="#" class="options-toggle" data-toggle="seo-options">SEO Options <i class="pull-right fa-angle-down"></i></a>
-            <div class="seo-options" style="display: none"> </div>
-        -->
-        {{ form_row(form.slug,              {help: 'User friendly URL fragment. If left blank, will be derived from title.', attr: {class:'form-control post-form-slug'}}) }}
-        {{ form_row(form.blurb,             {help: 'Preview text. If left blank, will be derived from content.'}) }}
+        {{ form_row(form.route,  {help: 'Symfony route name', attr: {class:'form-control post-form-route'}}) }}
+        {{ form_row(form.slug,   {help: 'User friendly URL fragment. If left blank, will be derived from title.', attr: {class:'form-control post-form-slug'}}) }}
+        {{ form_row(form.blurb,  {help: 'Preview text. If left blank, will be derived from content.'}) }}
 
         <hr />
 

@@ -8,7 +8,7 @@
       <property name="title">
         <constraint name="NotNull" />
         <constraint name="Length">
-          <option name="min">5</option>
+          <option name="min">2</option>
           <option name="max">75</option>
           <option name="minMessage">Title must be at least {{ limit }} characters in length</option>
           <option name="maxMessage">Title cannot be longer than {{ limit }} characters in length</option>
@@ -24,7 +24,14 @@
       <property name="slug">
         <constraint name="Regex">
           <option name="pattern">/[\w\d-\/]+/</option>
-          <option name="message">Slugs must be alphanumeric path with (hyphens allowed)</option>
+          <option name="message">Slugs must be alphanumeric path (hyphens allowed)</option>
+        </constraint>
+      </property>
+
+      <property name="route">
+        <constraint name="Regex">
+          <option name="pattern">/[\w\d_]+/</option>
+          <option name="message">Route must be alphanumeric route name (underscores allowed)</option>
         </constraint>
       </property>
 

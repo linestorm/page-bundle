@@ -2,6 +2,7 @@
 
 namespace LineStorm\PageBundle\Twig;
 
+use LineStorm\PageBundle\Model\Page;
 use LineStorm\PageBundle\Module\PageModule;
 use LineStorm\Content\Component\ComponentInterface;
 
@@ -32,6 +33,7 @@ class PageExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('render_content_component_view', array($this, 'renderContentComponentView'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('page_route', array($this, 'cmsPageRoute')),
         );
     }
 
@@ -52,6 +54,20 @@ class PageExtension extends \Twig_Extension
                 return $component->getView($entities);
             }
         }
+
+        return null;
+    }
+
+    /**
+     * Generate a page route for a page entity
+     *
+     * @param string $route
+     *
+     * @return string
+     */
+    public function cmsPageRoute($route)
+    {
+        return $this->pageModule->getRoutePrefix().$route;
     }
 
     /**

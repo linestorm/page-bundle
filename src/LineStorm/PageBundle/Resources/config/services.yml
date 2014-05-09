@@ -10,6 +10,8 @@ parameters:
 services:
   linestorm.cms.module.page:
     class: %linestorm.cms.module.page.class%
+    calls:
+      - ['setRoutePrefix', [%linestorm.cms.module.page.route_prefix%]]
     tags:
       - { name: linestorm.cms.module }
       - { name: linestorm.content.component_module }

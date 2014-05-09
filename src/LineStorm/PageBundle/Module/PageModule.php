@@ -19,6 +19,24 @@ class PageModule extends AbstractContentModule
     protected $name = 'Page';
     protected $id = 'page';
 
+    protected $routePrefix;
+
+    /**
+     * @param mixed $routePrefix
+     */
+    public function setRoutePrefix($routePrefix)
+    {
+        $this->routePrefix = $routePrefix;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoutePrefix()
+    {
+        return $this->routePrefix;
+    }
+
     /**
      * Returns the navigation array
      *

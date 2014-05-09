@@ -13,6 +13,7 @@
 
     <field name="blurb" type="string" column="blurb" length="100" precision="0" scale="0" nullable="true" />
     <field name="slug" type="string" column="slug" length="100" precision="0" scale="0" nullable="true" />
+    <field name="route" type="string" column="route" length="100" precision="0" scale="0" nullable="true" />
     <field name="metaDescription" type="string" column="meta_description" length="100" precision="0" scale="0" nullable="true" />
     <field name="metaKeywords" type="string" column="meta_keywords" length="100" precision="0" scale="0" nullable="true" />
 

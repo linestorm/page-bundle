@@ -15,6 +15,8 @@ class PageFormType extends AbstractCmsFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $module = $this->moduleManager->getModule('page');
+
         $builder
             ->add('title', 'text', array(
                 'required' => true
@@ -27,13 +29,17 @@ class PageFormType extends AbstractCmsFormType
                 'time_widget' => 'single_text',
                 'empty_data'  => new \DateTime(),
             ))
+            ->add('route', 'text', array(
+                'attr'  => array(
+                    'placeholder' => 'Prefix: '.$module->getRoutePrefix()
+                )
+            ))
             ->add('slug')
             ->add('blurb')
             ->add('metaDescription')
             ->add('metaKeywords')
         ;
 
-        $module = $this->moduleManager->getModule('page');
         foreach($module->getComponents() as $component){
             $component->buildForm($builder, $options);
         }

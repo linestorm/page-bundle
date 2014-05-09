@@ -30,5 +30,7 @@ class LineStormPageExtension extends Extension
         $xmlLoader->load('orm.xml');
 
         $container->getDefinition('linestorm.cms.module.page.model.page.listener')->addTag('doctrine.event_subscriber');
+
+        $container->setParameter('linestorm.cms.module.page.route_prefix', $config['route_prefix']);
     }
 }
