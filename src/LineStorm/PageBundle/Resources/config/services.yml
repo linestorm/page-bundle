@@ -24,7 +24,7 @@ services:
       - { name: routing.loader }
 
   #
-  # TWIG POST MODULE
+  # TWIG PAGE MODULE
   linestorm.cms.twig.module_page_extension:
     class: LineStorm\PageBundle\Twig\PageExtension
     arguments: [ @linestorm.cms.module.page ]
@@ -33,14 +33,14 @@ services:
 
   #
   # SEARCH PROVIDERS
-#  linestorm.cms.module.post.search_provider:
-#    class: %linestorm.cms.module.post.search_provider.class%
+#  linestorm.cms.module.page.search_provider:
+#    class: %linestorm.cms.module.page.search_provider.class%
 #    tags:
-#      - { name: linestorm.cms.module.search.provider, map: post }
+#      - { name: linestorm.cms.module.search.provider, map: page }
 
-#  linestorm.cms.module.post.search_provider:
-#    class: %linestorm.cms.module.post.search_provider.class%
+#  linestorm.cms.module.page.search_provider:
+#    class: %linestorm.cms.module.page.search_provider.class%
 #    tags:
-#      - { name: linestorm.cms.module.search.provider, map: post }
+#      - { name: linestorm.cms.module.search.provider, map: page }
 #    calls:
 #      - [ 'setSolr', [@solr.client.default]]

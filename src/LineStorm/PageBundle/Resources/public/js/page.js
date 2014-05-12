@@ -70,8 +70,8 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             return false;
         });
 
-        $('.post-form-delete').on('click', function(){
-            if(confirm("Are you sure you want to permanently delete this post?")){
+        $('.page-form-delete').on('click', function(){
+            if(confirm("Are you sure you want to permanently delete this page?")){
                 window.lineStorm.api.call($(this).data('url'), {
                     method: 'DELETE',
                     success: function(o){
@@ -82,11 +82,11 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             }
         });
 
-        var $postBodyHolder;
+        var $pageBodyHolder;
 
-        $postBodyHolder = $('.post-components');
+        $pageBodyHolder = $('.page-components');
 
-        $('a.post-component-new').on('click', function(e) {
+        $('a.page-component-new').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -95,9 +95,9 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             var prototype = $(this).data('prototype');
 
             // add a new tag form (see next code block)
-            var $el = addForm($postBodyHolder, prototype, contentCounts[id]);
+            var $el = addForm($pageBodyHolder, prototype, contentCounts[id]);
 
-            $el.find('.post-component-item').addClass('item-'+id).trigger('widget-init');
+            $el.find('.page-component-item').addClass('item-'+id).trigger('widget-init');
 
             return false;
         });
@@ -132,7 +132,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
         });
 
         // set up the sortable content
-        $postBodyHolder.sortable({
+        $pageBodyHolder.sortable({
             handle: '.item-reorder',
             axis: 'y',
             create: function( event, ui ) {
@@ -167,7 +167,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
                 }
 
                 // update the order
-                $postBodyHolder.children('li').each(function(i, li){
+                $pageBodyHolder.children('li').each(function(i, li){
                     var $li = $(li);
                     var $order = $li.find('input[name*="[order]"]');
                     $order.val(i);
@@ -176,10 +176,10 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
         });
 
         // configure remove button
-        $postBodyHolder.on('click', 'button.item-remove', function(){
+        $pageBodyHolder.on('click', 'button.item-remove', function(){
             if(confirm('Are you sure you want to remove this item?\n\nNOTE: IT CANNOT BE UNDONE ONCE SAVED')){
                 var i = $(this).data('count');
-                $(this).closest('.post-component-item').parent().remove();
+                $(this).closest('.page-component-item').parent().remove();
             }
         });
 
@@ -224,9 +224,9 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
         // auto fill in the slug until it is changed
         var hasSlugChanged = false,
             hasRouteChanged = false,
-            $slugInput  = $('input.post-form-slug'),
-            $routeInput  = $('input.post-form-route'),
-            $titleInput = $('input.post-form-title');
+            $slugInput  = $('input.page-form-slug'),
+            $routeInput  = $('input.page-form-route'),
+            $titleInput = $('input.page-form-title');
 
         $titleInput.on('keyup', function(){
             if(!hasSlugChanged){

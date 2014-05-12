@@ -12,12 +12,29 @@
     <a class="btn btn-success" href="{{ url('linestorm_cms_module_page_admin_create') }}">
         <i class="fa-plus"></i> New Page
     </a>
-    <div class="list-group">
-        {% for page in pages %}
-            <a class="list-group-item" href="{{ url('linestorm_cms_module_page_admin_edit', {id: page.id}) }}">
-                <h2 class="list-group-item-heading">{{ page.title }}</h2>
-                <span class="list-group-item-text">{% for tag in  page.tags %}<label class="label label-primary">{{ tag.name }}</label>{% endfor %}</span>
-            </a>
-        {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Page</th>
+                    <th>Slug</th>
+                    <th>Route</th>
+                    <th>Blurb</th>
+                    <th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for page in pages %}
+                <tr>
+                    <td><a href="{{ url('linestorm_cms_module_page_admin_edit', {id: page.id}) }}">{{ page.title }}</a></td>
+                    <td>{{ page.slug }}</td>
+                    <td>{{ page.route }}</td>
+                    <td>{{ page.blurb }}</td>
+                    <td>{{ include('LineStormTagComponentBundle::view.html.twig', {content: page.tags}) }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

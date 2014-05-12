@@ -11,8 +11,8 @@ use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * Class PostModule
- * @package LineStorm\PostBundle\Module
+ * Class PageModule
+ * @package LineStorm\PageBundle\Module
  */
 class PageModule extends AbstractContentModule
 {

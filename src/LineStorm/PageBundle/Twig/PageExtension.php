@@ -7,9 +7,9 @@ use LineStorm\PageBundle\Module\PageModule;
 use LineStorm\Content\Component\ComponentInterface;
 
 /**
- * Class PostExtension
+ * Class PageExtension
  *
- * @package LineStorm\PostBundle\Twig
+ * @package LineStorm\PageBundle\Twig
  */
 class PageExtension extends \Twig_Extension
 {

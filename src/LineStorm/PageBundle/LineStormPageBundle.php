@@ -3,7 +3,6 @@
 namespace LineStorm\PageBundle;
 
 use LineStorm\CmsBundle\DependencyInjection\ContainerBuilder\DoctrineOrmCompilerPass;
-use LineStorm\PostBundle\DependencyInjection\ContainerBuilder\ComponentCompilerPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

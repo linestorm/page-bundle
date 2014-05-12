@@ -3,7 +3,7 @@
 {% block requirejs %}
     {{
         include('LineStormCmsBundle::requirejs.html.twig', {
-            requirejs_module: ['app/main', 'cms_post_view']|merge(module.componentViewAssets)
+            requirejs_module: ['app/main', 'cms_page_view']|merge(module.componentViewAssets)
         })
     }}
 {% endblock %}
@@ -11,8 +11,8 @@
 {% block head %}
 
     {% stylesheets
-    filter="compass" output="assets/bundles/linestormpost/css/view.css"
-    "@LineStormPostBundle/Resources/assets/sass/view.scss"
+    filter="compass" output="assets/bundles/linestormpage/css/view.css"
+    "@LineStormpageBundle/Resources/assets/sass/view.scss"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -50,17 +50,12 @@
                         <time datetime="{{ page.liveOn | date("Y-m-d\\TH:i:sP") }}"  pubdate="pubdate">{{ page.liveOn | date("F d, Y") }}</time>
                     </div>
                     <div class="clearfix"></div>
-                    <div>
-                        <p>
-                            {{ include('LineStormPostBundle::social.html.twig') }}
-                        </p>
-                    </div>
                 </div>
 
                 <hr />
 
                 {% for content in page.content %}
-                    <div class="post-content">
+                    <div class="page-content">
                         {% set view = render_content_component_view(content) %}
                         {% if view %}
                             {% include view.template ignore missing with view.options %}

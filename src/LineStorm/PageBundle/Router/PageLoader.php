@@ -50,7 +50,7 @@ class PageLoader extends Loader implements LoaderInterface
                 '_controller' => 'LineStormPageBundle:Page:display',
                 'id' => $page->getId(),
             ));
-            $this->routes->add('linestorm_cms_page_'.$page->getId(), $route);
+            $this->routes->add('linestorm_cms_page_'.$page->getRoute(), $route);
         }
         $this->loaded = true;
 
