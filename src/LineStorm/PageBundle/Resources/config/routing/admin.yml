@@ -1,19 +1,33 @@
-linestorm_cms_module_page_admin_list:
+linestorm_cms_module_page_admin_page_list:
     pattern:  /
     defaults: { _controller: LineStormPageBundle:Admin:list }
 
-linestorm_cms_module_page_admin_edit:
+linestorm_cms_module_page_admin_page_edit:
     pattern:  /{id}/edit
     defaults: { _controller: LineStormPageBundle:Admin:edit }
     requirements:
        id: \d+
 
-linestorm_cms_module_page_admin_view:
+linestorm_cms_module_page_admin_page_view:
     pattern:  /{id}
     defaults: { _controller: LineStormPageBundle:Admin:view }
     requirements:
        id: \d+
 
-linestorm_cms_module_page_admin_create:
+linestorm_cms_module_page_admin_page_create:
     pattern:  /new
     defaults: { _controller: LineStormPageBundle:Admin:new }
+
+linestorm_cms_module_page_admin_page_type_list:
+    pattern:  /types/
+    defaults: { _controller: LineStormPageBundle:AdminPageType:list }
+
+linestorm_cms_module_page_admin_page_type_create:
+    pattern:  /types/new
+    defaults: { _controller: LineStormPageBundle:AdminPageType:new }
+
+linestorm_cms_module_page_admin_page_type_edit:
+    pattern:  /types/{id}/edit
+    defaults: { _controller: LineStormPageBundle:AdminPageType:edit }
+    requirements:
+       id: \d+

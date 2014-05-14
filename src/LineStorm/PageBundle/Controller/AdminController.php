@@ -19,7 +19,7 @@ class AdminController extends Controller
 
         $pages = $modelManager->get('page')->findAll();
 
-        return $this->render('LineStormPageBundle:Admin:list.html.twig', array(
+        return $this->render('LineStormPageBundle:Admin:Page/list.html.twig', array(
             'pages' => $pages,
         ));
     }
@@ -33,7 +33,7 @@ class AdminController extends Controller
         $modelManager = $this->get('linestorm.cms.model_manager');
         $page = $modelManager->get('page')->find($id);
 
-        return $this->render('LineStormPageBundle:Admin:view.html.twig', array(
+        return $this->render('LineStormPageBundle:Admin:Page/view.html.twig', array(
             'page'      => $page,
             'module'    => $module,
         ));
@@ -59,7 +59,7 @@ class AdminController extends Controller
             'method' => 'PUT',
         ));
 
-        return $this->render('LineStormPageBundle:Admin:edit.html.twig', array(
+        return $this->render('LineStormPageBundle:Admin:Page/edit.html.twig', array(
             'page'      => $page,
             'form'      => $form->createView(),
             'module'    => $module,
@@ -85,7 +85,7 @@ class AdminController extends Controller
             'method' => 'POST',
         ));
 
-        return $this->render('LineStormPageBundle:Admin:new.html.twig', array(
+        return $this->render('LineStormPageBundle:Admin:Page/new.html.twig', array(
             'page'      => null,
             'form'      => $form->createView(),
             'module'    => $module,

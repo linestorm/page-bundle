@@ -2,7 +2,8 @@
 # DEFAULT FORM TYPES
 #
 parameters:
-  linestorm.cms.module.page.form.page.class: LineStorm\PageBundle\Form\PageFormType
+  linestorm.cms.module.page.form.page.class:      LineStorm\PageBundle\Form\PageFormType
+  linestorm.cms.module.page.form.page_type.class: LineStorm\PageBundle\Form\PageTypeFormType
 
 services:
 
@@ -14,3 +15,10 @@ services:
         arguments: [@linestorm.cms.model_manager, @linestorm.cms.module_manager]
         tags:
             - { name: form.type, alias: linestorm_cms_form_page }
+
+  linestorm.cms.module.page.form.page_type:
+        class: %linestorm.cms.module.page.form.page_type.class%
+        arguments: [@linestorm.cms.model_manager, @linestorm.cms.module_manager]
+        tags:
+            - { name: form.type, alias: linestorm_cms_form_page_type }
+

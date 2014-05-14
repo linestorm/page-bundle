@@ -8,33 +8,36 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\View;
-use LineStorm\PageBundle\Model\Page;
+use LineStorm\PageBundle\Model\PageType;
 
 /**
- * API class for page model
+ * API class for page type model
  *
- * Class PageController
+ * Class PageTypeController
  *
  * @package LineStorm\PageBundle\Controller\Api
+ *
+ * @RouteResource("page/type")
  */
-class PageController extends AbstractApiController implements ClassResourceInterface
+class PageTypeController extends AbstractApiController implements ClassResourceInterface
 {
     /**
-     * Creates a Posy type form
+     * Creates a Page Type type form
      *
-     * @param null|Page $entity
+     * @param null|PageType $entity
      *
      * @return Form
      */
     private function getForm($entity = null)
     {
-        return $this->createForm('linestorm_cms_form_page', $entity);
+        return $this->createForm('linestorm_cms_form_page_type', $entity);
     }
 
     /**
-     * Get a single page
+     * Get a single page type
      *
      * @param $id
      *
@@ -51,8 +54,8 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $modelManager = $this->getModelManager();
 
-        $page = $modelManager->get('page')->find($id);
-        if(!($page instanceof Page))
+        $page = $modelManager->get('page_type')->find($id);
+        if(!($page instanceof PageType))
         {
             throw $this->createNotFoundException("Page not found");
         }
@@ -82,31 +85,26 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $formValues = json_decode($request->getContent(), true);
 
-        $form->submit($formValues['linestorm_cms_form_page']);
+        $form->submit($formValues['linestorm_cms_form_page_type']);
 
         if ($form->isValid()) {
 
             $em = $modelManager->getManager();
             $now = new \DateTime();
 
-            /** @var Page $page */
+            /** @var PageType $page */
             $page = $form->getData();
-            $page->setAuthor($user);
-            $page->setCreatedOn($now);
 
+            $page->setCreatedBy($user);
+            $page->setCreatedOn($now);
             $em->persist($page);
             $em->flush();
 
-            // update the search provider!
-            /*$searchManager = $this->get('linestorm.cms.module.search_manager');
-            $pageSearchProvider = $searchManager->get('page');
-            $pageSearchProvider->index($page);*/
-
             $locationPage = array(
-                'location' => $this->generateUrl('linestorm_cms_module_page_admin_page_edit', array( 'id' => $page->getId() ))
+                'location' => $this->generateUrl('linestorm_cms_module_page_admin_page_type_edit', array( 'id' => $page->getId() ))
             );
             $location = array(
-                'location' => $this->generateUrl('linestorm_cms_module_page_api_get_page', array( 'id' => $page->getId() ))
+                'location' => $this->generateUrl('linestorm_cms_module_page_type_api_get_type', array( 'id' => $page->getId() ))
             );
             $view = View::create($locationPage, 201, array( 'location' => $location ));
         } else {
@@ -135,8 +133,8 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $modelManager = $this->getModelManager();
 
-        $page = $modelManager->get('page')->find($id);
-        if(!($page instanceof Page))
+        $page = $modelManager->get('page_type')->find($id);
+        if(!($page instanceof PageType))
         {
             throw $this->createNotFoundException("Page not found");
         }
@@ -146,7 +144,7 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $formValues = json_decode($request->getContent(), true);
 
-        $form->submit($formValues['linestorm_cms_form_page']);
+        $form->submit($formValues['linestorm_cms_form_page_type']);
 
         if ($form->isValid())
         {
@@ -195,8 +193,8 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $modelManager = $this->getModelManager();
 
-        $page = $modelManager->get('page')->find($id);
-        if(!($page instanceof Page))
+        $page = $modelManager->get('page_type')->find($id);
+        if(!($page instanceof PageType))
         {
             throw $this->createNotFoundException("Page not found");
         }
@@ -213,7 +211,7 @@ class PageController extends AbstractApiController implements ClassResourceInter
 
         $view = View::create(array(
             'message'  => 'Page has been deleted',
-            'location' => $this->generateUrl('linestorm_cms_module_page_admin_page_list'),
+            'location' => $this->generateUrl('linestorm_cms_module_page_admin_page_type_list'),
         ));
 
         return $this->get('fos_rest.view_handler')->handle($view);

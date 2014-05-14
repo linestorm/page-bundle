@@ -46,8 +46,8 @@ class PageLoader extends Loader implements LoaderInterface
 
         foreach($pages as $page){
             /** @var $page Page */
-            $route = new Route($page->getRoute(), array(
-                '_controller' => 'LineStormPageBundle:Page:display',
+            $route = new Route($page->getSlug(), array(
+                '_controller' => $page->getPageType()->getFullControllerAction(),
                 'id' => $page->getId(),
             ));
             $this->routes->add('linestorm_cms_page_'.$page->getRoute(), $route);

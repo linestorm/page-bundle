@@ -29,6 +29,7 @@ class PageFormType extends AbstractCmsFormType
                 'time_widget' => 'single_text',
                 'empty_data'  => new \DateTime(),
             ))
+            ->add('pageType')
             ->add('route', 'text', array(
                 'attr'  => array(
                     'placeholder' => 'Prefix: '.$module->getRoutePrefix()

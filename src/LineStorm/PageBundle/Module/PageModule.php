@@ -45,7 +45,8 @@ class PageModule extends AbstractContentModule
     public function getNavigation()
     {
         return array(
-            'View All' => array('linestorm_cms_module_page_admin_list', array()),
+            'View Pages' => array('linestorm_cms_module_page_admin_page_list', array()),
+            'View Page Types' => array('linestorm_cms_module_page_admin_page_type_list', array()),
         );
     }
 

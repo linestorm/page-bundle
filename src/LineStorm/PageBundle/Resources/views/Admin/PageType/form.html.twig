@@ -1,0 +1,161 @@
+{% extends 'LineStormCmsBundle:Admin:layout.html.twig' %}
+{% import _self as fn %}
+
+{% macro modalContainer() %}
+    {% spaceless %}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">__title__</h4>
+                </div>
+                <div class="modal-body">
+                    __widget__
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="modal-save btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endspaceless %}
+{% endmacro %}
+
+
+{% block head %}
+    <script type="text/javascript">
+        window.lineStorm.modalContainer = "{{ fn.modalContainer()|e('js') }}";
+    </script>
+
+    {{
+        include('LineStormCmsBundle::requirejs.html.twig', {
+            requirejs_module: ['cms_main', 'cms_page_type']
+        })
+    }}
+
+    {% stylesheets
+        filter="compass" output="assets/bundles/linestormpage/css/page.css"
+        "@LineStormPageBundle/Resources/assets/sass/page.scss"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{% endblock %}
+
+{% block module %}
+
+    {{ form_start(form, {attr: { class: 'api-save'} }) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.controller,    {help: 'The Symfony Controller Path.'}) }}
+        {{ form_row(form.action,        {help: 'The Action in the Symfony Controller.'}) }}
+        {{ form_row(form.template,      {help: 'The Twig template to render inside the action.'}) }}
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-default page-save"><i class="fa-save"></i> Save</button>
+                {% block page_form_buttons %}
+                {% endblock %}
+            </div>
+        </div>
+
+    {{ form_end(form) }}
+
+    {# { form_start(form, {attr: { class: 'api-save'} }) }}
+        {{ form_row(form.title, {attr: {class:'form-control page-form-title'}}) }}
+        {{ form_row(form.coverImage) }}
+
+        <div class="row">
+            <img src="" class="cover-image">
+        </div>
+
+        {{ form_row(form.liveOn) }}
+        {{ form_row(form.pageType,  {help: 'The type of page determines which controller and template the page uses.\nYou must add a page type before creating a page.'}) }}
+        {{ form_row(form.route,     {help: 'Symfony route name.', attr: {class:'form-control page-form-route'}}) }}
+        {{ form_row(form.slug,      {help: 'User friendly URL fragment. If left blank, will be derived from title.', attr: {class:'form-control page-form-slug'}}) }}
+        {{ form_row(form.blurb,     {help: 'Preview text. If left blank, will be derived from content.'}) }}
+
+        <hr />
+
+
+        <a href="#" class="options-toggle" data-toggle="seo-options">SEO Advice <i class="pull-right fa-angle-down"></i></a>
+        <div class="seo-options" style="display: none">
+            <div class="row">
+                <div class="col-md-10 col-md-push-2">
+                    <p class="text-muted">
+                        <strong>Each page should be created with a keyword in mind:</strong><br/>
+                        Content : Should have between 1 - 2 uses of focus keyword/phrase<br/>
+                        Meta title: Should have between 1 - 2 uses of focus keyword/phrase<br/>
+                        Meta description: Should have 1 use of focus keyword/phrase<br/>
+                        URL: Should have 1 use of focus keyword/phrase<br/>
+                        Content: Should have 3+ uses of focus keyword/phrase
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        {{ form_row(form.metaDescription,   {help: 'Head meta description.'}) }}
+        {{ form_row(form.metaKeywords,      {help: 'Head meta keywords.'}) }}
+
+        <hr />
+
+        <h3>Meta Data</h3>
+        {% for component in module.getComponents('META') %}
+            {{ form_row(form[component.id], { attr: {class: 'tag-search form-control'} }) }}
+        {% endfor %}
+
+        <hr />
+
+        <h3>Content
+            <div class="pull-right btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                    Add Content <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    {% for component in module.getComponents('BODY') %}
+                        <li class="page-component-new-container">
+                            <a href="#" class="page-component-new page-{{ component.id }}-new" data-id="{{ component.id }}" data-prototype="{{ component.getForm(form[component.id].vars.prototype)|e }}">{{ component.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </h3>
+        <div class="page-component-container">
+
+            <ul class="page-components" data-prototype='<li><div class="page-component-item"><div class="page-component-item-widget">__widget__</div><div class="page-component-item-controls"><button type="button" class="btn btn-default item-remove" title="Remove This Article" data-count="article"><i class="fa-times"></i></button><span type="button" class="btn btn-default item-reorder" title="Click and Drag to Reorder"><i class="fa-arrows-v"></i></span></div></div></li>'>
+
+                {% for component in module.getComponents('BODY') %}
+                    {% for item in form[component.id] %}
+                        <li data-order="{{ item.order.vars.value }}">
+                            <div class="page-component-item item-{{ component.id }}">
+                                <div class="page-component-item-widget">{{ component.getForm(item)|raw }}</div>
+                                <div class="page-component-item-controls">
+                                    <button type="button" class="btn btn-default item-remove" title="Remove This {{ component.name }}"><i class="fa-times"></i></button>
+                                    <span class="btn btn-default item-reorder" title="Click and Drag to Reorder"><i class="fa-arrows-v"></i></span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-default page-save"><i class="fa-save"></i> Save</button>
+                {% block page_form_buttons %}
+                {% endblock %}
+            </div>
+        </div>
+
+        {{ form_widget(form._token) }}
+
+    {{ form_end(form) } #}
+
+{% endblock %}

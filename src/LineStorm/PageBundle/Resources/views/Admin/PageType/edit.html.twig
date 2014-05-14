@@ -1,0 +1,10 @@
+{% extends 'LineStormPageBundle:Admin:PageType/form.html.twig' %}
+
+{% block page_title %}Edit Page Type '{{ type.name }}'{% endblock %}
+{% block page_desc %}{% endblock %}
+
+{% block page_form_buttons %}
+    <button type="button" class="btn btn-danger page-form-delete" data-url="{{ path('linestorm_cms_module_page_type_api_delete_type', {id: type.id}) }}">
+        <i class="fa-trash-o"></i> Delete Page Type
+    </button>
+{% endblock %}

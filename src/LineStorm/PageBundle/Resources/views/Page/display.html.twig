@@ -12,7 +12,7 @@
 
     {% stylesheets
     filter="compass" output="assets/bundles/linestormpage/css/view.css"
-    "@LineStormpageBundle/Resources/assets/sass/view.scss"
+    "@LineStormPageBundle/Resources/assets/sass/view.scss"
     %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -33,7 +33,7 @@
 {% block body %}
     {% if app.user and page.author and (app.user.id == page.author.id or app.user.hasGroup('admin')) %}
         <div class="pull-right navbar-nav navbar" style="position: absolute; right: 0">
-            <a href="{{ path('linestorm_cms_module_page_admin_edit', {id: page.id}) }}" class="btn btn-primary" id="article-edit"><i class="fa-edit"></i> Edit</a>
+            <a href="{{ path('linestorm_cms_module_page_admin_page_edit', {id: page.id}) }}" class="btn btn-primary" id="article-edit"><i class="fa-edit"></i> Edit</a>
         </div>
     {% endif %}
         <article id="article-body blog">

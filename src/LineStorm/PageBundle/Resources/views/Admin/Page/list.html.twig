@@ -1,15 +1,15 @@
 {% extends 'LineStormCmsBundle:Admin:index.html.twig' %}
 
-{% block pagetitle %}
+{% block page_title %}
     Pages
 {% endblock %}
 
-{% block pagesubtitle %}
+{% block page_desc %}
     Defined endpoint nodes in your CMS
 {% endblock %}
 
 {% block module %}
-    <a class="btn btn-success" href="{{ url('linestorm_cms_module_page_admin_create') }}">
+    <a class="btn btn-success" href="{{ url('linestorm_cms_module_page_admin_page_create') }}">
         <i class="fa-plus"></i> New Page
     </a>
 
@@ -27,9 +27,9 @@
             <tbody>
             {% for page in pages %}
                 <tr>
-                    <td><a href="{{ url('linestorm_cms_module_page_admin_edit', {id: page.id}) }}">{{ page.title }}</a></td>
-                    <td>{{ page.slug }}</td>
-                    <td>{{ page.route }}</td>
+                    <td><a href="{{ url('linestorm_cms_module_page_admin_page_edit', {id: page.id}) }}">{{ page.title }}</a></td>
+                    <td><a href="{{ url(page_route(page.route)) }}" target="_blank">{{ page.slug }}</a></td>
+                    <td>{{ page_route(page.route) }}</td>
                     <td>{{ page.blurb }}</td>
                     <td>{{ include('LineStormTagComponentBundle::view.html.twig', {content: page.tags}) }}</td>
                 </tr>

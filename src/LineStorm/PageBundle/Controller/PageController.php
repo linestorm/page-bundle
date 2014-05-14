@@ -5,6 +5,13 @@ namespace LineStorm\PageBundle\Controller;
 use LineStorm\PageBundle\Model\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Default Page frontend controller
+ *
+ * Class PageController
+ *
+ * @package LineStorm\PageBundle\Controller
+ */
 class PageController extends Controller
 {
 
@@ -19,7 +26,9 @@ class PageController extends Controller
             throw $this->createNotFoundException();
         }
 
-        return $this->render('LineStormPageBundle::display.html.twig', array(
+        $pageType = $page->getPageType();
+
+        return $this->render($pageType->getTemplate(), array(
             'page' => $page,
             'module' => $module,
         ));

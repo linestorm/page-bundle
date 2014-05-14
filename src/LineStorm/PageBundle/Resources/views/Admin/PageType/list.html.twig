@@ -1,0 +1,38 @@
+{% extends 'LineStormCmsBundle:Admin:layout.html.twig' %}
+
+{% block page_title %}
+    Page Types
+{% endblock %}
+
+{% block page_desc %}
+    Defined content node types in your CMS
+{% endblock %}
+
+{% block module %}
+    <a class="btn btn-success" href="{{ url('linestorm_cms_module_page_admin_page_type_create') }}">
+        <i class="fa-plus"></i> New Page Type
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Page Type</th>
+                    <th>Controller</th>
+                    <th>Action</th>
+                    <th>Template</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for type in types %}
+                <tr>
+                    <td><a href="{{ url('linestorm_cms_module_page_admin_page_type_edit', {id: type.id}) }}">{{ type.name }}</a></td>
+                    <td>{{ type.controller }}</td>
+                    <td>{{ type.action }}</td>
+                    <td>{{ type.template }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

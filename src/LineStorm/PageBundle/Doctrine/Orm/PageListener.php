@@ -8,6 +8,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Query;
 use LineStorm\PageBundle\Model\Exception\PageSlugNonUniqueException;
 use LineStorm\PageBundle\Model\Page;
+use LineStorm\PageBundle\Model\PageType;
 use LineStorm\TagComponentBundle\Model\Tag;
 
 /**
@@ -51,6 +52,10 @@ class PageListener implements EventSubscriber
             if(count($result)){
                 throw new PageSlugNonUniqueException($object);
             }
+        }
+
+        if ($object instanceof PageType && $object->getCreatedOn() === null) {
+            $object->setCreatedOn(new \DateTime());
         }
 
         if ($object instanceof Tag && $object->getCreatedOn() === null) {

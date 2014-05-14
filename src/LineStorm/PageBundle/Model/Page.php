@@ -114,6 +114,11 @@ abstract class Page implements ContentNodeInterface
     protected $coverImage;
 
     /**
+     * @var PageType
+     */
+    protected $pageType;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -359,7 +364,7 @@ abstract class Page implements ContentNodeInterface
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getTags()
     {
@@ -416,7 +421,7 @@ abstract class Page implements ContentNodeInterface
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getArticles()
     {
@@ -462,7 +467,7 @@ abstract class Page implements ContentNodeInterface
     /**
      * Get galleries
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getGalleries()
     {
@@ -547,6 +552,22 @@ abstract class Page implements ContentNodeInterface
     public function getRoute()
     {
         return $this->route;
+    }
+
+    /**
+     * @param PageType $pageType
+     */
+    public function setPageType(PageType $pageType)
+    {
+        $this->pageType = $pageType;
+    }
+
+    /**
+     * @return PageType
+     */
+    public function getPageType()
+    {
+        return $this->pageType;
     }
 
 }

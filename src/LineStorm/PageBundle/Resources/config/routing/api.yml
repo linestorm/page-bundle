@@ -2,3 +2,8 @@ linestorm_cms_module_page_api_controller:
     type:     rest
     resource: LineStorm\PageBundle\Controller\Api\PageController
     name_prefix:  linestorm_cms_module_page_api_
+
+linestorm_cms_module_page_type_api_controller:
+    type:     rest
+    resource: LineStorm\PageBundle\Controller\Api\PageTypeController
+    name_prefix:  linestorm_cms_module_page_type_api_
