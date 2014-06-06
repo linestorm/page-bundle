@@ -24,10 +24,10 @@
 {% block meta_keywords %}{{ page.metaKeywords }}{% endblock %}
 {% block meta_desc %}{{ page.metaDescription }}{% endblock %}
 
-{% block title %}{{ page.title | capitalize }}{% endblock %}
+{% block title %}{{ page.blurb | capitalize }}{% endblock %}
 
 {% block page_title %}
-    {{ page.title | capitalize }}
+    {{ page.blurb | capitalize }}
 {% endblock %}
 
 {% block body %}

@@ -45,7 +45,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             e.preventDefault();
             e.stopPropagation();
             $('#FormErrors').slideUp(function(){ $(this).html(''); });
-            window.lineStorm.api.saveForm($(this), function(on, status, xhr){
+            api.saveForm($(this), function(on, status, xhr){
                 if(xhr.status === 200){
                 } else if(xhr.status === 201) {
                     window.location = on.location;
@@ -54,7 +54,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             }, function(e, status){
                 if(e.status === 400){
                     if(e.responseJSON){
-                        var errors = window.lineStorm.api.parseError(e.responseJSON.errors);
+                        var errors = api.parseError(e.responseJSON.errors);
                         var str = '';
                         for(var i in errors){
                             if(errors[i].length)
@@ -72,7 +72,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
 
         $('.page-form-delete').on('click', function(){
             if(confirm("Are you sure you want to permanently delete this page?")){
-                window.lineStorm.api.call($(this).data('url'), {
+                api.call($(this).data('url'), {
                     method: 'DELETE',
                     success: function(o){
                         alert(o.message);
@@ -84,9 +84,9 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
 
         var $pageBodyHolder;
 
-        $pageBodyHolder = $('.page-components');
+        $pageBodyHolder = $('.content-components');
 
-        $('a.page-component-new').on('click', function(e) {
+        $('a.content-component-new').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -97,7 +97,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             // add a new tag form (see next code block)
             var $el = addForm($pageBodyHolder, prototype, contentCounts[id]);
 
-            $el.find('.page-component-item').addClass('item-'+id).trigger('widget-init');
+            $el.find('.content-component-item').addClass('item-'+id).trigger('widget-init');
 
             return false;
         });
@@ -179,7 +179,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
         $pageBodyHolder.on('click', 'button.item-remove', function(){
             if(confirm('Are you sure you want to remove this item?\n\nNOTE: IT CANNOT BE UNDONE ONCE SAVED')){
                 var i = $(this).data('count');
-                $(this).closest('.page-component-item').parent().remove();
+                $(this).closest('.content-component-item').parent().remove();
             }
         });
 
@@ -195,7 +195,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
             e.stopPropagation();
 
 
-            window.lineStorm.api.call(this.href, {
+            api.call(this.href, {
                 'success': function(o){
                     if(o.form){
                         var $modal = $(window.lineStorm.modalContainer.replace(/__title__/gim, 'New Category').replace(/__widget__/gim, o.form));
@@ -205,7 +205,7 @@ define(['jquery', 'jqueryui', 'dropzone', 'cms_api'], function ($, $ui, Dropzone
                            $form.submit();
                         });
                         $form.on('submit', function(){
-                            window.lineStorm.api.saveForm($form, function(o){
+                            api.saveForm($form, function(o){
                                 $categorySelect.append('<option value="'+o.id+'">'+o.name+'</option>').val(o.id);
                                 $modal.modal('hide');
                             },function(xhr, state){

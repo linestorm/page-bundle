@@ -111,23 +111,23 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     {% for component in module.getComponents('BODY') %}
-                        <li class="post-component-new-container">
-                            <a href="#" class="post-component-new page-{{ component.id }}-new" data-id="{{ component.id }}" data-prototype="{{ component.getForm(form[component.id].vars.prototype)|e }}">{{ component.name }}</a>
+                        <li class="content-component-new-container">
+                            <a href="#" class="content-component-new page-{{ component.id }}-new" data-id="{{ component.id }}" data-prototype="{{ component.getForm(form[component.id].vars.prototype)|e }}">{{ component.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
         </h3>
-        <div class="post-component-container">
+        <div class="content-component-container">
 
-            <ul class="post-components" data-prototype='<li><div class="post-component-item"><div class="post-component-item-widget">__widget__</div><div class="post-component-item-controls"><button type="button" class="btn btn-default item-remove" title="Remove This Article" data-count="article"><i class="fa-times"></i></button><span type="button" class="btn btn-default item-reorder" title="Click and Drag to Reorder"><i class="fa-arrows-v"></i></span></div></div></li>'>
+            <ul class="content-components" data-prototype='<li><div class="content-component-item"><div class="content-component-item-widget">__widget__</div><div class="content-component-item-controls"><button type="button" class="btn btn-default item-remove" title="Remove This Article" data-count="article"><i class="fa-times"></i></button><span type="button" class="btn btn-default item-reorder" title="Click and Drag to Reorder"><i class="fa-arrows-v"></i></span></div></div></li>'>
 
                 {% for component in module.getComponents('BODY') %}
                     {% for item in form[component.id] %}
                         <li data-order="{{ item.order.vars.value }}">
-                            <div class="post-component-item item-{{ component.id }}">
-                                <div class="post-component-item-widget">{{ component.getForm(item)|raw }}</div>
-                                <div class="post-component-item-controls">
+                            <div class="content-component-item item-{{ component.id }}">
+                                <div class="content-component-item-widget">{{ component.getForm(item)|raw }}</div>
+                                <div class="content-component-item-controls">
                                     <button type="button" class="btn btn-default item-remove" title="Remove This {{ component.name }}"><i class="fa-times"></i></button>
                                     <span class="btn btn-default item-reorder" title="Click and Drag to Reorder"><i class="fa-arrows-v"></i></span>
                                 </div>
